@@ -27,7 +27,7 @@
     },
     {
       "id": 4,
-      "contract": 2018,
+      "contract": 2019,
       "offer": 36341,
       "data": "Satış",
       "extra1": "any value",
@@ -51,9 +51,25 @@
     },
     {
       "id": 7,
-      "contract": 2018,
+      "contract": 2019,
       "offer": 52152,
       "data": "Alış",
+      "extra1": "any value",
+      "extra2": "any value2"
+    },
+    {
+      "id": 8,
+      "contract": 2019,
+      "offer": 52152,
+      "data": "Alış",
+      "extra1": "any value",
+      "extra2": "any value2"
+    },
+    {
+      "id": 9,
+      "contract": 2018,
+      "offer": 522125,
+      "data": "Satış",
       "extra1": "any value",
       "extra2": "any value2"
     }

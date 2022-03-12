@@ -1,25 +1,24 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { fetchContracts, fetchContractsKeys } from 'store/mockapi';
+import { fetchJsonByName, fetchJsonKeys } from 'store/mockapi';
 
 const initialState = {
   data: [],
-  contractsKeys: [],
-  selectedContract: undefined,
+  jsonKeys: [],
+  selectedJson: undefined,
   columnFilter: [],
-  loading: false,
+  jsonData: false,
+  jsonKeysData: false,
   error: '',
 };
 
-export const fetchContractsKeysThunk = createAsyncThunk(
-  'contracts/fetchContractsKeysThunk',
-  (year) =>
-    fetchContractsKeys(year)
-      .then((res) => res.data)
-      .catch((err) => err)
+export const fetchJsonKeysThunk = createAsyncThunk('contracts/fetchJsonKeysThunk', (jsonName) =>
+  fetchJsonKeys(jsonName)
+    .then((res) => res.data)
+    .catch((err) => err)
 );
 
-export const fetchContractsThunk = createAsyncThunk('contracts/fetchContractsThunk', (year) =>
-  fetchContracts(year)
+export const fetchJsonThunk = createAsyncThunk('contracts/fetchJsonThunk', (year) =>
+  fetchJsonByName(year)
     .then((res) => res.data.data)
     .catch((err) => err)
 );
@@ -40,38 +39,38 @@ export const contractSlice = createSlice({
         selected: true,
       }));
     },
-    setSelectedContractKey: (state, { payload }) => {
-      state.selectedContract = payload;
+    setSelectedJsonKey: (state, { payload }) => {
+      state.selectedJson = payload;
     },
   },
   extraReducers: {
-    [fetchContractsThunk.pending]: (state) => {
-      state.loading = true;
+    [fetchJsonThunk.pending]: (state) => {
+      state.jsonDataLoading = true;
     },
-    [fetchContractsThunk.fulfilled]: (state, { payload }) => {
+    [fetchJsonThunk.fulfilled]: (state, { payload }) => {
       state.data = payload;
-      state.loading = false;
+      state.jsonDataLoading = false;
     },
-    [fetchContractsThunk.rejected]: (state, { payload }) => {
+    [fetchJsonThunk.rejected]: (state, { payload }) => {
       state.error = payload;
-      state.loading = false;
+      state.jsonDataLoading = false;
     },
-    [fetchContractsKeysThunk.pending]: (state) => {
-      state.keysLoading = true;
+    [fetchJsonKeysThunk.pending]: (state) => {
+      state.jsonKeysLoading = true;
     },
-    [fetchContractsKeysThunk.fulfilled]: (state, { payload }) => {
-      state.contractsKeys = payload || [];
-      state.selectedContract = payload && payload[0];
-      state.keysLoading = false;
+    [fetchJsonKeysThunk.fulfilled]: (state, { payload }) => {
+      state.jsonKeys = payload || [];
+      state.selectedJson = payload && payload[0];
+      state.jsonKeysLoading = false;
     },
-    [fetchContractsKeysThunk.rejected]: (state, { payload }) => {
-      state.contractsKeysError = payload;
-      state.keysLoading = false;
+    [fetchJsonKeysThunk.rejected]: (state, { payload }) => {
+      state.jsonKeysError = payload;
+      state.jsonKeysLoading = false;
     },
   },
 });
 
-export const { setColumnFilter, setInitialColumnFilter, setSelectedContractKey } =
+export const { setSelectedJsonKey, setColumnFilter, setInitialColumnFilter } =
   contractSlice.actions;
 
 export default contractSlice.reducer;

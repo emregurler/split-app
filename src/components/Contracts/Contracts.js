@@ -1,43 +1,67 @@
-import styles from './Contracts.module.scss';
-
-import React, { useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  fetchContractsKeysThunk,
-  fetchContractsThunk,
-  setSelectedContractKey,
+  fetchJsonKeysThunk,
   setInitialColumnFilter,
   setColumnFilter,
+  setSelectedJsonKey,
+  fetchJsonThunk,
 } from 'store/slices/contracts';
-import MultipleSelect from 'components/MultipleSelect/MultipleSelect';
-
-const { Option } = MultipleSelect;
+import View from './ContractsView';
 
 const Contracts = () => {
   const dispatch = useDispatch();
-  const { data, selectedContract, contractsKeys, columnFilter } = useSelector(
-    (state) => state.contractsReducer
-  );
+  const { data, jsonKeys, selectedJson, columnFilter, jsonDataLoading, jsonKeysLoading } =
+    useSelector((state) => state.contractsReducer);
+  const [selectedContractYear, setSelectedContractYear] = useState('');
+  const [visibleData, setVisibleData] = useState([]);
+
+  const contractsKeys = useMemo(() => {
+    if (data.length > 0) {
+      const uniqueContractKeys = Array.from(
+        new Set(data.map((datum) => datum.contract.toString()))
+      );
+      return uniqueContractKeys;
+    }
+  }, [data]);
 
   useEffect(() => {
-    dispatch(fetchContractsKeysThunk());
+    dispatch(fetchJsonKeysThunk());
   }, [dispatch]);
 
   useEffect(() => {
-    if (selectedContract) {
-      dispatch(fetchContractsThunk(selectedContract));
+    if (selectedJson) {
+      dispatch(fetchJsonThunk(selectedJson));
+      setSelectedContractYear('');
     }
-  }, [dispatch, selectedContract]);
+  }, [dispatch, selectedJson]);
 
   useEffect(() => {
     if (data && data.length) {
       dispatch(setInitialColumnFilter());
+      setVisibleData(data);
     }
   }, [dispatch, data]);
 
+  useEffect(() => {
+    if (contractsKeys && contractsKeys.includes(selectedContractYear)) {
+      const newVisibleData = data.filter(
+        (datum) => datum.contract.toString() === selectedContractYear
+      );
+      setVisibleData(newVisibleData);
+    } else {
+      setVisibleData(data);
+    }
+  }, [selectedContractYear, contractsKeys, data]);
+
+  const onJsonChange = (e) => {
+    const { value } = e.target;
+    dispatch(setSelectedJsonKey(value));
+  };
+
   const onContractChange = (e) => {
     const { value } = e.target;
-    dispatch(setSelectedContractKey(value));
+    setSelectedContractYear(value);
   };
 
   const onColumnFiltersChange = (id) => {
@@ -54,54 +78,32 @@ const Contracts = () => {
   };
 
   const visibleColumns = columnFilter.filter((cf) => cf.selected).map((cf) => cf.key);
-  console.log(data, contractsKeys, selectedContract, columnFilter);
+  console.log(
+    'selectedJson:',
+    selectedJson,
+    'data:',
+    data,
+    'visibleData:',
+    visibleData,
+    'selectedContractYear:',
+    selectedContractYear,
+    'columnFilter:',
+    columnFilter
+  );
   return (
-    <div className={styles.container}>
-      {contractsKeys.length > 0 && (
-        <>
-          <div className={styles.header}>
-            <select name="contractsList" onChange={onContractChange}>
-              {contractsKeys.map((key) => (
-                <option key={key} value={key}>
-                  {key}
-                </option>
-              ))}
-            </select>
-            <MultipleSelect options={columnFilter} onChange={onColumnFiltersChange} />
-          </div>
-
-          {data.length > 0 ? (
-            <div>
-              <table>
-                <thead>
-                  <tr>
-                    {visibleColumns.map((column) => (
-                      <th key={column} name={column}>
-                        {column}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {data.map((contract) => (
-                    <tr key={contract.id}>
-                      {Object.entries(contract).map(
-                        ([key, value]) =>
-                          visibleColumns.includes(key) && (
-                            <td key={contract.id + '_' + value + '_' + key}>{value}</td>
-                          )
-                      )}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          ) : (
-            <div>Please wait, loading</div>
-          )}
-        </>
-      )}
-    </div>
+    <View
+      jsonDataLoading={jsonDataLoading}
+      jsonKeysLoading={jsonKeysLoading}
+      jsonKeys={jsonKeys}
+      contractsKeys={contractsKeys}
+      visibleData={visibleData}
+      visibleColumns={visibleColumns}
+      selectedContractYear={selectedContractYear}
+      columnFilter={columnFilter}
+      onJsonChange={onJsonChange}
+      onContractChange={onContractChange}
+      onColumnFiltersChange={onColumnFiltersChange}
+    />
   );
 };
 
