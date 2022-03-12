@@ -1,7 +1,43 @@
 .header {
   display: flex;
-  height: 60px;
-  background-color: cadetblue;
+  align-items: center;
+  justify-content: space-between;
+  height: 65px;
+  background: linear-gradient(
+    90deg,
+    rgba(7, 34, 113, 1) 0%,
+    rgba(27, 47, 110, 1) 50%,
+    rgba(23, 91, 176, 1) 100%
+  );
+  padding: 0 16px;
+  color: white;
+
+  .logo {
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.1rem;
+  }
+
+  .rightContent {
+    display: inline-flex;
+    gap: 40px;
+    .calismaAlani {
+      display: flex;
+      gap: 8px;
+    }
+
+    .userInfo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      .userName {
+        text-transform: capitalize;
+        font-weight: 600;
+      }
+    }
+  }
 }
 
 .content {

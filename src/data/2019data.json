@@ -1,0 +1,61 @@
+{
+  "year": 2019,
+  "data": [
+    {
+      "id": 1,
+      "contractYear": 2018,
+      "offer": 1200,
+      "data": "Alış",
+      "extraColumn1": "any value",
+      "extraColumn2": "any value2"
+    },
+    {
+      "id": 2,
+      "contractYear": 2018,
+      "offer": 140,
+      "data": "Alış",
+      "extraColumn1": "any value",
+      "extraColumn2": "any value2"
+    },
+    {
+      "id": 3,
+      "contractYear": 2018,
+      "offer": 1555,
+      "data": "Satış",
+      "extraColumn1": "any value",
+      "extraColumn2": "any value2"
+    },
+    {
+      "id": 4,
+      "contractYear": 2018,
+      "offer": 36341,
+      "data": "Satış",
+      "extraColumn1": "any value",
+      "extraColumn2": "any value2"
+    },
+    {
+      "id": 5,
+      "contractYear": 2018,
+      "offer": 52152,
+      "data": "Alış",
+      "extraColumn1": "any value",
+      "extraColumn2": "any value2"
+    },
+    {
+      "id": 6,
+      "contractYear": 2018,
+      "offer": 52152,
+      "data": "Alış",
+      "extraColumn1": "any value",
+      "extraColumn2": "any value2"
+    },
+    {
+      "id": 7,
+      "contractYear": 2018,
+      "offer": 52152,
+      "data": "Alış",
+      "extraColumn1": "any value",
+      "extraColumn2": "any value2"
+    }
+  ]
+}
