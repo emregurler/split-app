@@ -5,7 +5,7 @@ const initialState = {
   data: [],
   contractsKeys: [],
   selectedContract: undefined,
-  selectedColumns: [],
+  columnFilter: [],
   loading: false,
   error: '',
 };
@@ -28,12 +28,17 @@ export const contractSlice = createSlice({
   name: 'contracts',
   initialState,
   reducers: {
-    setSelectedColumns: (state, { payload }) => {
-      state.selectedColumns = payload;
+    setColumnFilter: (state, { payload }) => {
+      state.columnFilter = payload;
     },
-    setInitialSelectedColumns: (state) => {
+    setInitialColumnFilter: (state) => {
       const exampleObject = state.data && state.data[0] && state.data[0];
-      state.selectedColumns = Object.keys(exampleObject);
+      const keys = Object.keys(exampleObject);
+      state.columnFilter = keys.map((key, index) => ({
+        key,
+        id: index,
+        selected: true,
+      }));
     },
     setSelectedContractKey: (state, { payload }) => {
       state.selectedContract = payload;
@@ -66,7 +71,7 @@ export const contractSlice = createSlice({
   },
 });
 
-export const { setSelectedColumns, setInitialSelectedColumns, setSelectedContractKey } =
+export const { setColumnFilter, setInitialColumnFilter, setSelectedContractKey } =
   contractSlice.actions;
 
 export default contractSlice.reducer;

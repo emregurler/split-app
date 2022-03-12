@@ -1,5 +1,40 @@
 .container {
-  th {
+  table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+
+  tr,
+  th,
+  td {
     text-transform: capitalize;
+    text-align: left;
+    padding: 8px 0;
+  }
+
+  th {
+    background-color: lightgray;
+  }
+
+  tr {
+    border-bottom: 1px solid lightgray;
+  }
+
+  th[name='id'] {
+    width: 60px;
+    max-width: 600px;
+  }
+
+  td:first-child,
+  th:first-child {
+    padding-left: 8px;
+  }
+
+  .header {
+    display: flex;
+    padding: 8px 12px;
+    justify-content: space-between;
   }
 }

@@ -6,13 +6,16 @@ import {
   fetchContractsKeysThunk,
   fetchContractsThunk,
   setSelectedContractKey,
-  setInitialSelectedColumns,
-  setSelectedColumns,
+  setInitialColumnFilter,
+  setColumnFilter,
 } from 'store/slices/contracts';
+import MultipleSelect from 'components/MultipleSelect/MultipleSelect';
+
+const { Option } = MultipleSelect;
 
 const Contracts = () => {
   const dispatch = useDispatch();
-  const { data, selectedContract, contractsKeys, selectedColumns } = useSelector(
+  const { data, selectedContract, contractsKeys, columnFilter } = useSelector(
     (state) => state.contractsReducer
   );
 
@@ -28,7 +31,7 @@ const Contracts = () => {
 
   useEffect(() => {
     if (data && data.length) {
-      dispatch(setInitialSelectedColumns());
+      dispatch(setInitialColumnFilter());
     }
   }, [dispatch, data]);
 
@@ -37,45 +40,61 @@ const Contracts = () => {
     dispatch(setSelectedContractKey(value));
   };
 
-  const onColumnFiltersChange = (e) => {
-    const { value } = e.target;
-    const newColumnFilters = selectedColumns.includes(value)
-      ? selectedColumns.filter((column) => column !== value)
-      : [...selectedColumns, value];
-    dispatch(setSelectedColumns(newColumnFilters));
+  const onColumnFiltersChange = (id) => {
+    const foundIndex = columnFilter.findIndex((col) => col.id === id);
+    if (foundIndex !== undefined && foundIndex > -1) {
+      const newColumnFilters = columnFilter.map((colFilter) =>
+        colFilter.id === id ? { ...colFilter, selected: !colFilter.selected } : colFilter
+      );
+      const isChangeable = newColumnFilters.filter((f) => f.selected).length > 0;
+      if (isChangeable) {
+        dispatch(setColumnFilter(newColumnFilters));
+      }
+    }
   };
 
-  console.log(data, contractsKeys, selectedContract, selectedColumns);
+  const visibleColumns = columnFilter.filter((cf) => cf.selected).map((cf) => cf.key);
+  console.log(data, contractsKeys, selectedContract, columnFilter);
   return (
     <div className={styles.container}>
       {contractsKeys.length > 0 && (
         <>
-          <select name="contractsList" onChange={onContractChange}>
-            {contractsKeys.map((key) => (
-              <option key={key} value={key}>
-                {key}
-              </option>
-            ))}
-          </select>
+          <div className={styles.header}>
+            <select name="contractsList" onChange={onContractChange}>
+              {contractsKeys.map((key) => (
+                <option key={key} value={key}>
+                  {key}
+                </option>
+              ))}
+            </select>
+            <MultipleSelect options={columnFilter} onChange={onColumnFiltersChange} />
+          </div>
+
           {data.length > 0 ? (
             <div>
               <table>
                 <thead>
                   <tr>
-                    {selectedColumns.map((column) => (
-                      <th key={column}>{column}</th>
+                    {visibleColumns.map((column) => (
+                      <th key={column} name={column}>
+                        {column}
+                      </th>
                     ))}
                   </tr>
                 </thead>
-                <tbody></tbody>
+                <tbody>
+                  {data.map((contract) => (
+                    <tr key={contract.id}>
+                      {Object.entries(contract).map(
+                        ([key, value]) =>
+                          visibleColumns.includes(key) && (
+                            <td key={contract.id + '_' + value + '_' + key}>{value}</td>
+                          )
+                      )}
+                    </tr>
+                  ))}
+                </tbody>
               </table>
-              <select multiple name="columnFilters" onChange={onColumnFiltersChange}>
-                {selectedColumns.map((key) => (
-                  <option key={key} value={key}>
-                    {key}
-                  </option>
-                ))}
-              </select>
             </div>
           ) : (
             <div>Please wait, loading</div>

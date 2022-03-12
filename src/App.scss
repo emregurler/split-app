@@ -1,7 +1,6 @@
 .app {
   display: flex;
   flex-direction: column;
-  background-color: burlywood;
 }
 
 .verticalSplitter {
@@ -22,28 +21,26 @@
   cursor: ns-resize;
 }
 
-.gutter,
 .gutter-horizontal {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
   cursor: col-resize;
-  background-color: rgb(229, 231, 235);
+  background-color: rgb(235, 235, 235);
+  border: 1px solid rgb(197, 198, 201);
   background-repeat: no-repeat;
   background-position: 50% center;
-  width: 100%;
 }
 
-.gutter,
 .gutter-vertical {
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII=');
-  cursor: col-resize;
-  background-color: rgb(229, 231, 235);
+  cursor: row-resize;
+  background-color: rgb(235, 235, 235);
+  border: 1px solid rgb(197, 198, 201);
   background-repeat: no-repeat;
   background-position: 50% center;
 }
 
 .splitContainer {
-  border: 5px solid red;
-  color: white;
+  overflow: auto;
   height: 100%;
   display: inline-block;
 }

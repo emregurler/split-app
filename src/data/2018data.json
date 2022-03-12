@@ -3,31 +3,31 @@
   "data": [
     {
       "id": 10,
-      "contractYear": 2019,
+      "contract": 2019,
       "offer": 1,
       "data": "Alış"
     },
     {
       "id": 11,
-      "contractYear": 2019,
+      "contract": 2019,
       "offer": 2131,
       "data": "Alış"
     },
     {
       "id": 12,
-      "contractYear": 2019,
+      "contract": 2019,
       "offer": 612221.05,
       "data": "Satış"
     },
     {
       "id": 13,
-      "contractYear": 2019,
+      "contract": 2019,
       "offer": 231.1,
       "data": "Satış"
     },
     {
       "id": 14,
-      "contractYear": 2019,
+      "contract": 2019,
       "offer": 12521225.2125,
       "data": "Alış"
     }

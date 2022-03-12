@@ -1,0 +1,30 @@
+.container {
+  position: relative;
+  svg {
+    width: 16px;
+  }
+
+  .dropdownContainer {
+    position: absolute;
+    right: 0;
+    top: 20px;
+    min-width: 120px;
+    max-width: 240px;
+    overflow: hidden;
+    background-color: white;
+    border: 1px solid black;
+
+    .optionContainer {
+      display: flex;
+      align-items: center;
+      padding: 4px 8px;
+      gap: 8px;
+
+      .optionLabel {
+        flex: 1;
+        flex-wrap: wrap;
+        margin-bottom: 2px;
+      }
+    }
+  }
+}
