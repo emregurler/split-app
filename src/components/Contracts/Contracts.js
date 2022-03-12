@@ -7,12 +7,13 @@ import {
   setSelectedJsonKey,
   fetchJsonThunk,
 } from 'store/slices/contracts';
-import View from './ContractsView';
+import ContractsView from './ContractsView';
 
 const Contracts = () => {
   const dispatch = useDispatch();
   const { data, jsonKeys, selectedJson, columnFilter, jsonDataLoading, jsonKeysLoading } =
     useSelector((state) => state.contractsReducer);
+
   const [selectedContractYear, setSelectedContractYear] = useState('');
   const [visibleData, setVisibleData] = useState([]);
 
@@ -91,7 +92,8 @@ const Contracts = () => {
     columnFilter
   );
   return (
-    <View
+    <ContractsView
+      selectedJson={selectedJson}
       jsonDataLoading={jsonDataLoading}
       jsonKeysLoading={jsonKeysLoading}
       jsonKeys={jsonKeys}

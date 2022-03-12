@@ -34,7 +34,13 @@
 
   .header {
     display: flex;
-    padding: 8px 12px;
     justify-content: space-between;
+    padding: 8px 12px;
+
+    .contentSelectors {
+      display: flex;
+      gap: 8px;
+      flex: 1;
+    }
   }
 }

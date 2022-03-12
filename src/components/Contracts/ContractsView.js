@@ -1,14 +1,14 @@
 import styles from './Contracts.module.scss';
 
 import React from 'react';
-import MultipleSelect from 'components/MultipleSelect/MultipleSelect';
+import { Select, MultipleSelect, Table } from 'components';
 
 const ContractsView = (props) => {
   const {
+    selectedJson,
     jsonKeys,
     contractsKeys,
     jsonDataLoading,
-    jsonKeysLoading,
     visibleData,
     visibleColumns,
     selectedContractYear,
@@ -23,57 +23,32 @@ const ContractsView = (props) => {
       {jsonKeys.length > 0 && (
         <>
           <div className={styles.header}>
-            <select name="jsonsList" onChange={onJsonChange}>
-              {jsonKeys.map((key) => (
-                <option key={key} value={key}>
-                  {key}
-                </option>
-              ))}
-            </select>
-            {contractsKeys && (
-              <>
-                <select
-                  name="contractsList"
-                  value={selectedContractYear}
-                  onChange={onContractChange}
-                >
-                  <option value="">Choose Contract</option>
-                  {contractsKeys.map((key) => (
-                    <option key={key} value={key}>
-                      {key}
-                    </option>
-                  ))}
-                </select>
-                <MultipleSelect options={columnFilter} onChange={onColumnFiltersChange} />
-              </>
-            )}
+            <div className={styles.contentSelectors}>
+              <Select
+                isDefaultOptionDisabled
+                value={selectedJson}
+                defaultOption="Choose Json"
+                options={jsonKeys}
+                onChange={onJsonChange}
+              />
+
+              {contractsKeys && (
+                <>
+                  <Select
+                    value={selectedContractYear}
+                    defaultOption="Choose Contract"
+                    options={contractsKeys}
+                    onChange={onContractChange}
+                  />
+                </>
+              )}
+            </div>
+            <MultipleSelect options={columnFilter} onChange={onColumnFiltersChange} />
           </div>
 
           {!jsonDataLoading && visibleData.length > 0 ? (
             <div>
-              <table>
-                <thead>
-                  <tr>
-                    {visibleColumns.map((column) => (
-                      <th key={column} name={column}>
-                        {column}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {visibleData.map((contract) => (
-                    <tr key={contract.id}>
-                      {Object.entries(contract).map(
-                        ([key, value]) =>
-                          visibleColumns.includes(key) && (
-                            <td key={contract.id + '_' + value + '_' + key}>{value}</td>
-                          )
-                      )}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              <Table data={visibleData} columns={visibleColumns} />
             </div>
           ) : (
             <div>Please wait, loading</div>
