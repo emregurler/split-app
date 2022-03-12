@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+
+  div {
+    margin-bottom: 40px;
+  }
+
+  .logsContainer {
+    font-size: 14px;
+    padding: 16px;
+    margin: 12px;
+    background-color: burlywood;
+    border: 2px solid black;
+    align-self: flex-end;
+
+    span {
+      font-weight: bold;
+    }
+  }
+}
