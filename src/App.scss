@@ -1,19 +1,14 @@
-.App {
+.app {
   display: flex;
   flex-direction: column;
   background-color: burlywood;
 }
 
-.content {
-  display: flex;
+.verticalSplitter {
   flex: 1;
 }
 
-.vertical-splitter {
-  flex: 1;
-}
-
-.horizontal-splitter {
+.horizontalSplitter {
   display: flex;
   height: 100%;
 }
@@ -46,7 +41,7 @@
   background-position: 50% center;
 }
 
-.comp {
+.splitContainer {
   border: 5px solid red;
   color: white;
   height: 100%;

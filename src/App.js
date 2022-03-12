@@ -2,21 +2,23 @@ import './App.scss';
 
 import React from 'react';
 import Split from 'react-split';
-import { Header } from 'components';
+import { Header, Content } from 'layout';
+import { AddableForm, Contracts, LoremIpsum, SplitPositionLogger } from 'components';
 
-function C1() {
-  return <div class="comp">Component 1 {Date.now()}</div>;
-}
-function C2() {
-  return <div class="comp">Component 2 {Date.now()}</div>;
+function SplitContainer({ children }) {
+  return <div className="splitContainer">{children}</div>;
 }
 
 function UpperHorizontal() {
   return (
     <div>
-      <Split className="horizontal-splitter" direction="horizontal" sizes={[50, 50]}>
-        <C1 />
-        <C2 />
+      <Split className="horizontalSplitter" direction="horizontal" sizes={[70, 30]}>
+        <SplitContainer>
+          <Contracts />
+        </SplitContainer>
+        <SplitContainer>
+          <SplitPositionLogger />
+        </SplitContainer>
       </Split>
     </div>
   );
@@ -25,9 +27,13 @@ function UpperHorizontal() {
 function BottomHorizontal() {
   return (
     <div>
-      <Split className="horizontal-splitter" direction="horizontal" sizes={[50, 50]}>
-        <C1 />
-        <C2 />
+      <Split className="horizontalSplitter" direction="horizontal" sizes={[70, 30]}>
+        <SplitContainer>
+          <AddableForm />
+        </SplitContainer>
+        <SplitContainer>
+          <LoremIpsum />
+        </SplitContainer>
       </Split>
     </div>
   );
@@ -35,14 +41,14 @@ function BottomHorizontal() {
 
 function App() {
   return (
-    <div className="App">
+    <div className="app">
       <Header />
-      <div className="content">
-        <Split className="vertical-splitter" direction="vertical" sizes={[50, 50]}>
+      <Content>
+        <Split className="verticalSplitter" direction="vertical" sizes={[70, 30]}>
           <UpperHorizontal />
           <BottomHorizontal />
         </Split>
-      </div>
+      </Content>
     </div>
   );
 }
