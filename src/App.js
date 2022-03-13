@@ -48,7 +48,12 @@ function App() {
             </Split>
           </div>
           <div>
-            <Split name="bottomHorizontal" direction="horizontal" sizes={bottomHorizontalSizes}>
+            <Split
+              minSize={400}
+              name="bottomHorizontal"
+              direction="horizontal"
+              sizes={bottomHorizontalSizes}
+            >
               <SplitContainer>
                 <AddableForm />
               </SplitContainer>

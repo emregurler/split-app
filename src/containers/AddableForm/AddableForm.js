@@ -82,6 +82,24 @@ const initialState = [
     offer: 8754,
     data: 'Satış',
   },
+  {
+    id: 14,
+    contract: 'XYZ12345',
+    offer: 8754,
+    data: 'Satış',
+  },
+  {
+    id: 15,
+    contract: 'XYZ12345',
+    offer: 8754,
+    data: 'Satış',
+  },
+  {
+    id: 16,
+    contract: 'XYZ12345',
+    offer: 8754,
+    data: 'Satış',
+  },
 ];
 
 const AddableForm = () => {
