@@ -1,0 +1,55 @@
+table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+tr,
+th,
+td {
+  text-transform: capitalize;
+  text-align: left;
+  padding: 8px 0;
+}
+
+th {
+  background-color: lightgray;
+}
+
+th:last-child {
+  width: 150px;
+}
+
+tr {
+  border-bottom: 1px solid lightgray;
+}
+
+th[name='id'] {
+  width: 60px;
+  max-width: 600px;
+}
+
+td:first-child,
+th:first-child {
+  padding-left: 8px;
+}
+
+.addStarterButton {
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: #70c57a;
+}
+
+.addButton {
+  cursor: pointer;
+  font-weight: bold;
+  color: #70c57a;
+}
+
+.removeButton {
+  cursor: pointer;
+  color: red;
+  font-weight: bold;
+}

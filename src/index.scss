@@ -12,8 +12,14 @@ body,
     'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  // background-color: lightblue;
   height: 100%;
+}
+
+button {
+  background-color: unset;
+  border: unset;
+  margin-right: 8px;
+  cursor: pointer;
 }
 
 code {

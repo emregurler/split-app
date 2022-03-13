@@ -79,18 +79,7 @@ const Contracts = () => {
   };
 
   const visibleColumns = columnFilter.filter((cf) => cf.selected).map((cf) => cf.key);
-  console.log(
-    'selectedJson:',
-    selectedJson,
-    'data:',
-    data,
-    'visibleData:',
-    visibleData,
-    'selectedContractYear:',
-    selectedContractYear,
-    'columnFilter:',
-    columnFilter
-  );
+
   return (
     <ContractsView
       selectedJson={selectedJson}
