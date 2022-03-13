@@ -1,9 +1,10 @@
 import './App.scss';
 
 import React, { useEffect } from 'react';
-import { Header, Content } from 'layout';
-import { AddableForm, Contracts, LoremIpsum, SplitPositionLogger, Split } from 'components';
 import { useDispatch, useSelector } from 'react-redux';
+import { Header, Content } from 'layout';
+import { Contracts, SplitPositionLogger, AddableForm, LoremIpsum } from 'containers';
+import { Split } from 'components';
 import { setSplitSize } from 'store/slices/split-sizes';
 
 function SplitContainer({ children }) {

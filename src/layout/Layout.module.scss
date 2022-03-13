@@ -21,12 +21,21 @@
   .rightContent {
     display: inline-flex;
     gap: 40px;
+
+    svg,
+    path {
+      width: 24px;
+      fill: white;
+    }
     .calismaAlani {
+      cursor: pointer;
       display: flex;
+      align-items: center;
       gap: 8px;
     }
 
     .userInfo {
+      cursor: pointer;
       display: flex;
       justify-content: center;
       align-items: center;

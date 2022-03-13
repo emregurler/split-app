@@ -2,6 +2,7 @@ import style from './Layout.module.scss';
 
 import React, { useState } from 'react';
 import { UserAvatar } from 'components';
+import { ReactComponent as SaveIcon } from 'components/Icons/save.svg';
 
 const Header = () => {
   const [user] = useState({
@@ -14,7 +15,10 @@ const Header = () => {
     <div className={style.header}>
       <div className={style.logo}>EPİAŞ</div>
       <div className={style.rightContent}>
-        <span>Çalışma Alanı</span>
+        <div className={style.calismaAlani}>
+          <SaveIcon />
+          Çalışma Alanı
+        </div>
         <div className={style.userInfo}>
           <UserAvatar firstName={user.name} secondName={user.surname} />
           <span>
