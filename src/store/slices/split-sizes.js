@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  verticalSizes: [],
-  upperHorizontalSizes: [],
-  bottomHorizontalSizes: [],
+  verticalSizes: undefined,
+  upperHorizontalSizes: undefined,
+  bottomHorizontalSizes: undefined,
 };
 
 export const splitSizesReducer = createSlice({

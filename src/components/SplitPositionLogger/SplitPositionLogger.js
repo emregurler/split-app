@@ -8,6 +8,8 @@ const SplitPositionLogger = () => {
     (state) => state.splitSizeReducer
   );
 
+  const getLogText = (sizes = []) => (sizes.length > 0 ? `${sizes[0]} ${sizes[1]}` : ' - ');
+
   return (
     <div className={styles.container}>
       <div className={styles.logsContainer}>
@@ -16,19 +18,19 @@ const SplitPositionLogger = () => {
           <span>
             Yatay Pencere Değerleri <br />
           </span>
-          {verticalSizes[0]} {verticalSizes[1]}
+          {getLogText(verticalSizes)}
         </div>
         <div>
           <span>
             Üst Dikey Pencere Değerleri: <br />
           </span>
-          {upperHorizontalSizes[0]} {upperHorizontalSizes[1]}
+          {getLogText(upperHorizontalSizes)}
         </div>
         <div>
           <span>
             Alt Dikey Pencere Değerleri: <br />
           </span>
-          {bottomHorizontalSizes[0]} {bottomHorizontalSizes[1]}
+          {getLogText(bottomHorizontalSizes)}
         </div>
       </div>
     </div>
